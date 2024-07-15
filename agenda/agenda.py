@@ -1,6 +1,7 @@
 import os
 import sqlite3
 from sqlite3 import Error
+from datetime import datetime
 
 # Conexão
 def conexaoBanco():
@@ -21,13 +22,13 @@ def query(conexao,sql):
         print(ex)
     finally:
         print("Operação Realizada com Sucesso")
-        #conexao.close()
+        
 
 def consultar(conexao,sql):
     c=conexao.cursor()
     c.execute(sql)
     res = c.fetchall()
-    #conexao.close()
+    vcon.close()
     return res
 
 
@@ -60,7 +61,17 @@ def verificarOpc(opc):
 
 def menuInserir():
     os.system("cls")
-
+    data= datetime.now()
+    nome = input("Digite o NOME: ")
+    dia = int(input("Dia do  Nascimento: "))
+    mes = int(input("Mês do Nascimento: "))
+    ano = int(input("Ano do Nascimento: "))
+    nascimento = datetime(year=ano,month=mes,day=dia)
+    telefone = int(input("Digite o Telefone: "))
+    email = input("Digite o E-mail: ")
+    obs = input("Observaçôes: ")
+    vsql=f'INSERT INTO tb_contatos (D_CADASTRO,N_CONTATO,D_NASCIMENTO,N_TELEFONE,EMAIL,T_OBS) VALUES("{data.date()}","{nome}","{nascimento}","{telefone}","{email}","{obs}")'
+    query(vcon,vsql)
 
 def menuDeletar():
     pass
