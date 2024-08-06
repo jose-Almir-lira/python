@@ -1,7 +1,7 @@
 import os
 import sqlite3
 from sqlite3 import Error
-from datetime import datetime
+import datetime
 
 # Conexão
 def conexaoBanco():
@@ -61,20 +61,23 @@ def verificarOpc(opc):
 
 def menuInserir():
     os.system("cls")
-    data= datetime.now()
+    data= datetime.date.today()
     nome = input("Digite o NOME: ")
     dia = int(input("Dia do  Nascimento: "))
     mes = int(input("Mês do Nascimento: "))
     ano = int(input("Ano do Nascimento: "))
-    nascimento = datetime(year=ano,month=mes,day=dia)
+    nascimento = datetime.date(ano,mes,dia)
     telefone = int(input("Digite o Telefone: "))
     email = input("Digite o E-mail: ")
     obs = input("Observaçôes: ")
-    vsql=f'INSERT INTO tb_contatos (D_CADASTRO,N_CONTATO,D_NASCIMENTO,N_TELEFONE,EMAIL,T_OBS) VALUES("{data.date()}","{nome}","{nascimento}","{telefone}","{email}","{obs}")'
+    vsql=f'INSERT INTO tb_contatos (D_CADASTRO,N_CONTATO,D_NASCIMENTO,N_TELEFONE,EMAIL,T_OBS) VALUES("{data }","{nome}","{nascimento}","{telefone}","{email}","{obs}")'
     query(vcon,vsql)
 
 def menuDeletar():
-    pass
+    os.system("cls")
+    vid=input("Digite o ID do registro a ser deletado: ")
+    vsql = f'DELETE FROM tb_contatos WHERE ID_CONTATO={vid}'
+    query(vcon,vsql)
 
 def menuAtualizar():
     pass
